@@ -14,6 +14,7 @@ builder.Services.ConfigureRepositoryWrapper();
 
 builder.Services.AddControllers();
 
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
