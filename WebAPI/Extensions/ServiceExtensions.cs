@@ -1,6 +1,8 @@
 ﻿using Contracts;
+using Entities;
 using LoggerService;
-
+using Microsoft.EntityFrameworkCore;
+using Repository;
 
 namespace WebAPI.Extensions
 {
@@ -34,7 +36,13 @@ namespace WebAPI.Extensions
         {
             var connectionString = configuration["ConnectionStrings:SqlConnectionString"];
 
-            //services.AddDbContext
+            services.AddDbContext<RepositoryContext>(options => 
+            options.UseSqlServer(connectionString, opt => opt.MigrationsAssembly("WebAPI")));
+        }
+
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }
