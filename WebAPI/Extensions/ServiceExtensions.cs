@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using LoggerService;
 
+
 namespace WebAPI.Extensions
 {
     public static class ServiceExtensions
@@ -27,6 +28,13 @@ namespace WebAPI.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration["ConnectionStrings:SqlConnectionString"];
+
+            //services.AddDbContext
         }
     }
 }
