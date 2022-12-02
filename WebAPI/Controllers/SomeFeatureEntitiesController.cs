@@ -155,15 +155,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid uid)
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                var someFeatureEntity = _repository.SomeFeatureEntity.GetByGuidId(uid);
+                var someFeatureEntity = _repository.SomeFeatureEntity.GetByGuidId(id);
                 if (someFeatureEntity is null)
                 {
                     _logger.LogError($"Some feature entity with id: {id}, hasn't been found in database");
                     return NotFound();
+                }
+
+                if (_repository.SomeFeatureDetailEntity.GetAllBySomeFeature(id).Any())
+                {
+                    _logger.LogError($"Cannot delete some feature entity with id: {id}. It has related detail entities. Delete those some feature detail entity first");
+                    return BadRequest("Cannot delete some feature entity. It has related detail entities. Delete those some feature detail entity first");
                 }
 
                 _repository.SomeFeatureEntity.Delete(someFeatureEntity);

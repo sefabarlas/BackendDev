@@ -9,5 +9,10 @@ namespace Repository
         public SomeFeatureDetailEntityRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<SomeFeatureDetailEntity> GetAllBySomeFeature(Guid someFeatureId)
+        {
+            return GetAllByCondition(x => x.SomeFeatureEntityId.Equals(someFeatureId)).ToList();
+        }
     }
 }
