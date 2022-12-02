@@ -1,3 +1,4 @@
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using WebAPI.Extensions;
@@ -31,6 +32,9 @@ else
 {
     app.UseHsts();
 }
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 
