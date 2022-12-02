@@ -8,8 +8,9 @@ namespace WebAPI
     {
         public MappingProfile()
         {
-            CreateMap<SomeFeatureEntity, SomeFeatureEntityDto>();
-            CreateMap<SomeFeatureDetailEntity, SomeFeatureDetailEntityDto>();
+            CreateMap<SomeFeatureEntity, SomeFeatureEntityDto>().ReverseMap();
+            CreateMap<SomeFeatureDetailEntity, SomeFeatureDetailEntityDto>().ReverseMap();
+            CreateMap<SomeFeatureEntity, SomeFeatureEntityForCreationDto>().ReverseMap();
             CreateMap<SomeFeatureEntity, SomeFeatureEntityForCreationDto>().ReverseMap();
         }
     }

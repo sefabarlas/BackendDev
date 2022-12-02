@@ -116,5 +116,66 @@ namespace WebAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpPut]
+        public IActionResult Update(Guid id, [FromBody] SomeFeatureEntityForUpdateDto data)
+        {
+            try
+            {
+                if (data is null)
+                {
+                    _logger.LogError("Some feature entity object sent from client is null.");
+                    return BadRequest("Some feature entity object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid some feature entity object sent from client.");
+                    return BadRequest("Invalid some feature entity object");
+                }
+
+                var someFeatureEntity = _repository.SomeFeatureEntity.GetByGuidId(id);
+                if (someFeatureEntity is null)
+                {
+                    _logger.LogError($"Some feature entity with id: {id}, hasn't been found in database");
+                    return NotFound();
+                }
+
+                _mapper.Map(data, someFeatureEntity);
+                _repository.SomeFeatureEntity.Update(someFeatureEntity);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Something went wrong inside Update action: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid uid)
+        {
+            try
+            {
+                var someFeatureEntity = _repository.SomeFeatureEntity.GetByGuidId(uid);
+                if (someFeatureEntity is null)
+                {
+                    _logger.LogError($"Some feature entity with id: {id}, hasn't been found in database");
+                    return NotFound();
+                }
+
+                _repository.SomeFeatureEntity.Delete(someFeatureEntity);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Something went wrong inside Delete action: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
