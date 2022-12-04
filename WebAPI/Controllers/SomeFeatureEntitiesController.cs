@@ -2,7 +2,6 @@
 using Contracts;
 using Entities.Dtos;
 using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

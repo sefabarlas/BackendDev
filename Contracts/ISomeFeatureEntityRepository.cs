@@ -1,5 +1,4 @@
-﻿using Entities.Dtos;
-using Entities.Models;
+﻿using Entities.Models;
 
 namespace Contracts
 {

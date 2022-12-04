@@ -7,7 +7,6 @@ namespace Entities
     {
         public RepositoryContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<SomeFeatureEntity>? SomeFeatureEntity { get; set; }

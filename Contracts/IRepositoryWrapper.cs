@@ -4,6 +4,7 @@
     {
         ISomeFeatureEntityRepository SomeFeatureEntity { get; }
         ISomeFeatureDetailEntityRepository SomeFeatureDetailEntity { get; }
+
         void Save();
     }
 }

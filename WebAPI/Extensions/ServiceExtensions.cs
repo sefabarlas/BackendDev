@@ -23,7 +23,6 @@ namespace WebAPI.Extensions
         {
             services.Configure<IISOptions>(options =>
             {
-
             });
         }
 
@@ -36,7 +35,7 @@ namespace WebAPI.Extensions
         {
             var connectionString = configuration["ConnectionStrings:SqlConnectionString"];
 
-            services.AddDbContext<RepositoryContext>(options => 
+            services.AddDbContext<RepositoryContext>(options =>
             options.UseSqlServer(connectionString, opt => opt.MigrationsAssembly("WebAPI")));
         }
 

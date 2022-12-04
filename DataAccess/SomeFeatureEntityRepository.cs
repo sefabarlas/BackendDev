@@ -9,7 +9,6 @@ namespace Repository
     {
         public SomeFeatureEntityRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            
         }
 
         public SomeFeatureEntity? GetSomeFeatureEntityWithDetails(Guid id)
