@@ -8,6 +8,7 @@ namespace Repository
         private RepositoryContext _repositoryContext;
         private ISomeFeatureEntityRepository _someFeatureEntity;
         private ISomeFeatureDetailEntityRepository _someFeatureDetailEntity;
+        private ISystemMessageRepository _systemMessage;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -37,6 +38,19 @@ namespace Repository
                 }
 
                 return _someFeatureDetailEntity;
+            }
+        }
+
+        public ISystemMessageRepository SystemMessage
+        {
+            get
+            {
+                if (_systemMessage == null)
+                {
+                    _systemMessage = new SystemMessageRepository(_repositoryContext);
+                }
+
+                return _systemMessage;
             }
         }
 
